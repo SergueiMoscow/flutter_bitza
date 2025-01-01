@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_s3_app/api/auth_api.dart';
+import 'package:flutter_s3_app/screens/payments_screen.dart';
+import 'package:flutter_s3_app/screens/summary_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import 'api/auth_provider.dart';
+import 'screens/login_screen.dart';
+
+// final apiHost = dotenv.env['API_HOST'];
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Битца',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // Английский
+        Locale('ru'), // Русский
+      ],
+      locale: const Locale('ru'),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: MaterialApp.router(
+        title: 'Битца',
+        routerConfig: _router,
+      ),
+    );
+  }
+}
+
+final GoRouter _router = GoRouter(
+    // initialLocation: '/',
+    routes: [
+  GoRoute(
+    path: '/',
+    builder: (context, state) => const LoginScreen(),
+  ),
+      GoRoute(
+        path: '/main',
+        builder: (context, state) => SummaryScreen(),
+      ),
+]);
+
+class AuthenticationGate extends StatelessWidget{
+  const AuthenticationGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<bool>(
+        future: AuthApiService().isLoggedIn(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasData && snapshot.data == true) {
+            return SummaryScreen();
+          }
+          return LoginScreen();
+        });
+  }
+}
