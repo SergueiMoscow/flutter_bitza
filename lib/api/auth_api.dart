@@ -82,12 +82,14 @@ class AuthApiService {
       required String method,
       Map<String, String>? headers,
       dynamic body}) async {
+    final loggedIn = await isLoggedIn();
+    if (!loggedIn) {
+      throw Exception('Not logged in');
+    }
+
     String? accessToken = await _storage.read(key: _accessTokenKey);
     if (accessToken == null) {
-      accessToken = await _refreshAccessToken();
-      if (accessToken == null) {
-        throw Exception('Unauthorized');
-      }
+      throw Exception('Unauthorized');
     }
 
     final url = Uri.parse('$_host$endpoint');

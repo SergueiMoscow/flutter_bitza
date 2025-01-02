@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_s3_app/screens/electric_meter_screen.dart';
 import 'package:flutter_s3_app/screens/main_screen.dart';
 import 'package:flutter_s3_app/screens/profile_screen.dart';
 import 'package:flutter_s3_app/screens/summary_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
-import 'screens/payments_screen.dart';
 import 'screens/login_screen.dart';
 
 Future<void> main() async {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AuthProvider>(
       create: (_) => AuthProvider(),
       child: MaterialApp(
-        title: 'Контроль оплат',
+        title: 'Bitza',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/payments': (context) => SummaryScreen(),
           '/main': (context) => MainScreen(),
           '/profile': (context) => ProfileScreen(),
+          '/electric_meter': (context) => ElectricMeterScreen(),
         },
       ),
     );

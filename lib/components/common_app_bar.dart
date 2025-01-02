@@ -33,6 +33,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
         MenuItem(route: '/profile', endpoint: '/profile', caption: 'Профиль', icon: 'person', picture: 'profile.jpg'),
         MenuItem(route: '/settings', endpoint: '/settings', caption: 'Настройки', icon: 'settings', picture: 'settings.jpg'),
         MenuItem(route: '/payments', endpoint: '/payments', caption: 'Платежи', icon: 'payments', picture: 'payments.jpg'),
+        MenuItem(route: '/electric_meter', endpoint: '/electric_meter', caption: 'Внесение показаний', icon: 'electric_meter', picture: 'electric_meter.jpg'),
       ];
       setState(() {
         menuItems = fetchedMenu;
@@ -60,6 +61,8 @@ class _CommonAppBarState extends State<CommonAppBar> {
         return Icons.settings;
       case 'payments':
         return Icons.payments;
+      case 'electric_meter':
+        return Icons.electric_meter;
       default:
         return Icons.help;
     }
