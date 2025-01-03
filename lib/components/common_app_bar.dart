@@ -34,6 +34,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
         MenuItem(route: '/settings', endpoint: '/settings', caption: 'Настройки', icon: 'settings', picture: 'settings.jpg'),
         MenuItem(route: '/payments', endpoint: '/payments', caption: 'Платежи', icon: 'payments', picture: 'payments.jpg'),
         MenuItem(route: '/electric_meter', endpoint: '/electric_meter', caption: 'Внесение показаний', icon: 'electric_meter', picture: 'electric_meter.jpg'),
+        MenuItem(route: '/electric_consumption', endpoint: '/electric_consumption', caption: 'Расход электроэнергии', icon: 'electric_consumption', picture: 'electric_consumption.jpg'),
       ];
       setState(() {
         menuItems = fetchedMenu;
@@ -63,6 +64,8 @@ class _CommonAppBarState extends State<CommonAppBar> {
         return Icons.payments;
       case 'electric_meter':
         return Icons.electric_meter;
+      case 'electric_consumption':
+        return Icons.electric_meter_sharp;
       default:
         return Icons.help;
     }
@@ -72,7 +75,7 @@ class _CommonAppBarState extends State<CommonAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Bitza'),
-      leading:         PopupMenuButton<MenuItem>(
+      leading: PopupMenuButton<MenuItem>(
         onSelected: (MenuItem item) {
           Navigator.pushNamed(context, item.route);
         },
