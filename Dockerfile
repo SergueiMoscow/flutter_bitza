@@ -1,4 +1,7 @@
-FROM cirrusci/flutter:stable AS builder
+FROM instrumentisto/flutter:3 AS builder
+
+RUN adduser -D github
+USER github
 
 WORKDIR /app
 COPY . .
