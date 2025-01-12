@@ -1,8 +1,5 @@
-// services/electricity_service.dart
-
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../models/electricity_reading.dart';
+import '../models/electricity_reading_model.dart';
 import 'auth_api.dart';
 
 class ElectricityService {

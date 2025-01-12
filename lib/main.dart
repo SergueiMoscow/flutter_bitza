@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_s3_app/screens/consumption_screen.dart';
 import 'package:flutter_s3_app/screens/electric_meter_screen.dart';
+import 'package:flutter_s3_app/screens/expenses_screen.dart';
 import 'package:flutter_s3_app/screens/main_screen.dart';
 import 'package:flutter_s3_app/screens/profile_screen.dart';
 import 'package:flutter_s3_app/screens/summary_screen.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           '/profile': (context) => ProfileScreen(),
           '/electric_meter': (context) => ElectricMeterScreen(),
           '/electric_consumption': (context) => ConsumptionScreen(),
+          '/expenses': (context) => ExpensesScreen(),
         },
       ),
     );

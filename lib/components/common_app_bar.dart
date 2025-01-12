@@ -28,13 +28,14 @@ class _CommonAppBarState extends State<CommonAppBar> {
       // Заменить этот блок на метод получения меню из backend
       // Например:
       // final fetchedMenu = await BackendService.getMenuForUser();
-      final fetchedMenu = [ // Пример
+      final fetchedMenu = [
         MenuItem(route: '/main', endpoint: '/dashboard', caption: 'Главная', icon: 'home', picture: 'home.jpg'),
         MenuItem(route: '/profile', endpoint: '/profile', caption: 'Профиль', icon: 'person', picture: 'profile.jpg'),
         MenuItem(route: '/settings', endpoint: '/settings', caption: 'Настройки', icon: 'settings', picture: 'settings.jpg'),
-        MenuItem(route: '/payments', endpoint: '/payments', caption: 'Платежи', icon: 'payments', picture: 'payments.jpg'),
-        MenuItem(route: '/electric_meter', endpoint: '/electric_meter', caption: 'Внесение показаний', icon: 'electric_meter', picture: 'electric_meter.jpg'),
-        MenuItem(route: '/electric_consumption', endpoint: '/electric_consumption', caption: 'Расход электроэнергии', icon: 'electric_consumption', picture: 'electric_consumption.jpg'),
+        MenuItem(route: '/payments', endpoint: '/payments', caption: 'Платежи', icon: 'attach_money', picture: 'payments.jpg'),
+        MenuItem(route: '/electric_meter', endpoint: '/electric_meter', caption: 'Внесение показаний', icon: 'edit', picture: 'electric_meter.jpg'),
+        MenuItem(route: '/electric_consumption', endpoint: '/electric_consumption', caption: 'Расход электроэнергии', icon: 'assessment', picture: 'electric_consumption.jpg'),
+        MenuItem(route: '/expenses', endpoint: '/expenses', caption: 'Расходы', icon: 'credit_card', picture: 'credit_card.jpg'),
       ];
       setState(() {
         menuItems = fetchedMenu;
@@ -66,6 +67,16 @@ class _CommonAppBarState extends State<CommonAppBar> {
         return Icons.electric_meter;
       case 'electric_consumption':
         return Icons.electric_meter_sharp;
+      case 'credit_card':
+        return Icons.credit_card;
+      case 'monetization_on':
+        return Icons.monetization_on;
+      case 'attach_money':
+        return Icons.attach_money;
+      case 'edit':
+        return Icons.edit;
+      case 'assessment':
+        return Icons.assessment;
       default:
         return Icons.help;
     }

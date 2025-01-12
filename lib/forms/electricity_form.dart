@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../api/electricity_api.dart';
-import '../models/electricity_reading.dart';
+import '../models/electricity_reading_model.dart';
 import 'dart:async';
 
 class ElectricityForm extends StatefulWidget {
