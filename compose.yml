@@ -1,0 +1,9 @@
+services:
+  flutter_bitza:
+    container_name: flutter-bitza
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8083:80"
+    restart: unless-stopped

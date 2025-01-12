@@ -17,7 +17,7 @@ class _ElectricityFormState extends State<ElectricityForm> {
   late Future<List<ElectricityReading>> _futureReadings;
   final _formKey = GlobalKey<FormState>();
   final Map<String, TextEditingController> _controllers = {};
-  final Map<String, String?> _errors = {};
+  // final Map<String, String?> _errors = {};
 
   @override
   void initState() {
@@ -196,7 +196,7 @@ class _RoomReadingWidgetState extends State<RoomReadingWidget> {
   Widget build(BuildContext context) {
     final reading = widget.reading;
     final today = DateTime.now().toIso8601String().split('T')[0];
-    final isToday = reading.date == today;
+    // final isToday = reading.date == today;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

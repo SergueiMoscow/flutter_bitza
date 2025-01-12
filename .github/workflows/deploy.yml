@@ -1,0 +1,31 @@
+name: Deploy Flutter Web Application
+
+on:
+  push:
+    branches:
+      - master  # Измени на вашу основную ветку, если требуется
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Убедись, что self-hosted runner установлен на сервере
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Настроить безопасный путь Git
+        run: git config --global --add safe.directory /home/github/flutter_bitza
+
+      - name: Копировать .env файл, если не существует
+        run: |
+          if [ ! -f /home/github/flutter_bitza/.env ]; then
+            echo "${{ secrets.ENV_FILE }}" > /home/github/flutter_bitza/.env
+          fi
+
+      - name: Деплой приложения
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          cd /home/github/flutter_bitza
+          git pull origin master
+          docker compose up -d --build
