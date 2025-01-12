@@ -26,7 +26,7 @@ WORKDIR /app/
 # Build the Flutter web application
 # RUN flutter build web --release --web-renderer html
 # web-renderer deprecated
-RUN flutter build web --release
+RUN flutter build web --release --no-source-maps
 
 
 FROM nginx:1.21.1-alpine
