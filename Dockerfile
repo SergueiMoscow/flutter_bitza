@@ -24,7 +24,10 @@ COPY . /app/
 WORKDIR /app/
 
 # Build the Flutter web application
-RUN flutter build web --release --web-renderer html
+# RUN flutter build web --release --web-renderer html
+# web-renderer deprecated
+RUN flutter build web --release
+
 
 FROM nginx:1.21.1-alpine
 COPY --from=build-env /app/build/web /usr/share/nginx/html
