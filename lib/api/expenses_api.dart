@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_s3_app/api/auth_api.dart';
 import 'package:flutter_s3_app/models/expenses_cheque_model.dart';
+import 'package:logger/logger.dart';
 
 class ExpensesApi {
   final AuthApiService _authApi = AuthApiService();
+  var logger = Logger(
+    printer: PrettyPrinter(),
+    level: Level.debug,
+  );
 
   Future<List<ExpensesChequeModel>> fetchExpenses(
       DateTime startDate, DateTime endDate, String searchQuery) async {
@@ -17,6 +22,7 @@ class ExpensesApi {
       endpoint:
           endpoint + responseUrl(startDateString, endDateString, searchQuery),
     );
+    logger.d(response.body);
 
     if (response.statusCode == 200) {
       final body = utf8.decode(response.bodyBytes);
