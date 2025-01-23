@@ -31,32 +31,22 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
   void initState() {
     super.initState();
     fetchHistoryExpenses();
-    logger.d('ExpensesTabHistory set state');
   }
 
   Future<void> fetchHistoryExpenses() async {
-    logger.d('fetchHistoryExpenses 1');
     setState(() {
       isLoading = true;
     });
     try {
-      logger.d('log fetchHistoryExpenses before fetch');
-      print('print fetchHistoryExpenses before fetch');
-      debugPrint('debugPrint fetchHistoryExpenses before fetch');
       searchResults =
           await _expensesApi.fetchExpenses(startDate, endDate, searchQuery);
-      logger.d('log fetchHistoryExpenses after fetch');
-      print('print fetchHistoryExpenses after fetch');
-      debugPrint('debugPrint fetchHistoryExpenses after fetch');
       // Прокручиваем в конец после загрузки данных
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       });
-      logger.d('fetchHistoryExpenses after scrolling');
-      print('fetchHistoryExpenses after scrolling');
     } catch (e) {
       // Обработка ошибок
-      print('Error fetching expenses: $e');
+      debugPrint('Error fetching expenses: $e');
     } finally {
       setState(() {
         isLoading = false;

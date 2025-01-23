@@ -22,7 +22,6 @@ class _ExpensesTabSearchState extends State<ExpensesTabSearch> {
 
   Future<void> fetchExpenses() async {
     setState(() {
-      debugPrint('expenses_tab_search setState');
       isLoading = true;
     });
 
@@ -30,7 +29,6 @@ class _ExpensesTabSearchState extends State<ExpensesTabSearch> {
       searchResults = await _expensesApi.fetchExpenses(startDate, endDate, searchQuery);
     } catch (e) {
       // Обработка ошибок
-      print('Error fetching expenses: $e');
     } finally {
       setState(() {
         isLoading = false;
