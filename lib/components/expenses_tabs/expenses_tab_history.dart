@@ -28,6 +28,7 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
   void initState() {
     super.initState();
     fetchHistoryExpenses();
+    logger.d('ExpensesTabHistory set state');
   }
 
   Future<void> fetchHistoryExpenses() async {
