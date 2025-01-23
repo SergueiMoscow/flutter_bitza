@@ -23,6 +23,7 @@ class ExpensesApi {
           endpoint + responseUrl(startDateString, endDateString, searchQuery),
     );
     logger.d(response.body);
+    print(response.body);
 
     if (response.statusCode == 200) {
       final body = utf8.decode(response.bodyBytes);

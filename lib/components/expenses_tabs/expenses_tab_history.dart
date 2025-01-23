@@ -38,14 +38,17 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
     });
     try {
       logger.d('fetchHistoryExpenses before fetch');
+      print('fetchHistoryExpenses before fetch');
       searchResults =
           await _expensesApi.fetchExpenses(startDate, endDate, searchQuery);
       logger.d('fetchHistoryExpenses after fetch');
+      print('fetchHistoryExpenses after fetch');
       // Прокручиваем в конец после загрузки данных
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       });
       logger.d('fetchHistoryExpenses after scrolling');
+      print('fetchHistoryExpenses after scrolling');
     } catch (e) {
       // Обработка ошибок
       print('Error fetching expenses: $e');
