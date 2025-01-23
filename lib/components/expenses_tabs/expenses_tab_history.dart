@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '../../api/expenses_api.dart';
 import '../../models/expenses_cheque_model.dart';
@@ -21,6 +22,7 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
 
   final ExpensesApi _expensesApi = ExpensesApi();
   final ScrollController _scrollController = ScrollController();
+  final Logger logger = Logger(level: Level.debug);
 
   @override
   void initState() {
@@ -29,16 +31,20 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
   }
 
   Future<void> fetchHistoryExpenses() async {
+    logger.d('fetchHistoryExpenses 1');
     setState(() {
       isLoading = true;
     });
     try {
+      logger.d('fetchHistoryExpenses before fetch');
       searchResults =
           await _expensesApi.fetchExpenses(startDate, endDate, searchQuery);
+      logger.d('fetchHistoryExpenses after fetch');
       // Прокручиваем в конец после загрузки данных
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       });
+      logger.d('fetchHistoryExpenses after scrolling');
     } catch (e) {
       // Обработка ошибок
       print('Error fetching expenses: $e');
