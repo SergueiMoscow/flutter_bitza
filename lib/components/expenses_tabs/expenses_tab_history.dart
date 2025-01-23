@@ -22,7 +22,10 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
 
   final ExpensesApi _expensesApi = ExpensesApi();
   final ScrollController _scrollController = ScrollController();
-  final Logger logger = Logger(level: Level.debug);
+  final Logger logger = Logger(
+    printer: PrettyPrinter(),
+    level: Level.debug,
+  );
 
   @override
   void initState() {
@@ -37,12 +40,14 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
       isLoading = true;
     });
     try {
-      logger.d('fetchHistoryExpenses before fetch');
-      print('fetchHistoryExpenses before fetch');
+      logger.d('log fetchHistoryExpenses before fetch');
+      print('print fetchHistoryExpenses before fetch');
+      debugPrint('debugPrint fetchHistoryExpenses before fetch');
       searchResults =
           await _expensesApi.fetchExpenses(startDate, endDate, searchQuery);
-      logger.d('fetchHistoryExpenses after fetch');
-      print('fetchHistoryExpenses after fetch');
+      logger.d('log fetchHistoryExpenses after fetch');
+      print('print fetchHistoryExpenses after fetch');
+      debugPrint('debugPrint fetchHistoryExpenses after fetch');
       // Прокручиваем в конец после загрузки данных
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
@@ -61,20 +66,20 @@ class _ExpensesTabHistoryState extends State<ExpensesTabHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? Center( child:
-            CircularProgressIndicator()
-          )
-        : Expanded(
-            child: ListView.builder(
-              controller: _scrollController, // Привязываем ScrollController
-              itemCount: searchResults.length,
-              itemBuilder: (context, index) {
-                return ExpensesChequeCardComponent(
-                  cheque: searchResults[index],
-                );
-              },
+    return Column(children: [
+      isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Expanded(
+              child: ListView.builder(
+                controller: _scrollController, // Привязываем ScrollController
+                itemCount: searchResults.length,
+                itemBuilder: (context, index) {
+                  return ExpensesChequeCardComponent(
+                    cheque: searchResults[index],
+                  );
+                },
+              ),
             ),
-          );
+    ]);
   }
 }

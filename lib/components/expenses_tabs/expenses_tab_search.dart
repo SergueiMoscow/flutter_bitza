@@ -22,6 +22,7 @@ class _ExpensesTabSearchState extends State<ExpensesTabSearch> {
 
   Future<void> fetchExpenses() async {
     setState(() {
+      debugPrint('expenses_tab_search setState');
       isLoading = true;
     });
 
