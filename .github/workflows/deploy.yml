@@ -1,31 +1,25 @@
-name: Deploy Flutter Web Application
+name: Trigger Jenkins Pipeline
 
 on:
   push:
     branches:
-      - master  # Измени на вашу основную ветку, если требуется
+      - main
 
 jobs:
-  deploy:
-    runs-on: self-hosted  # Убедись, что self-hosted runner установлен на сервере
-
+  trigger-jenkins:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Install jq
+        run: sudo apt-get install -y jq
 
-      - name: Настроить безопасный путь Git
-        run: git config --global --add safe.directory /home/github/flutter_bitza
-
-      - name: Копировать .env файл, если не существует
+      - name: Получить Crumb
+        id: get-crumb
         run: |
-          if [ ! -f /home/github/flutter_bitza/.env ]; then
-            echo "${{ secrets.ENV_FILE }}" > /home/github/flutter_bitza/.env
-          fi
+          CRUMB=$(${{ secrets.CRUMB_URL }})
+          echo "CRUMB=${CRUMB}" >> $GITHUB_OUTPUT
 
-      - name: Деплой приложения
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
+      - name: Trigger Jenkins Job
         run: |
-          cd /home/github/flutter_bitza
-          git pull origin master
-          docker compose up -d --build
+          curl -X POST "${{ secrets.DEPLOY_URL }}" \
+            -H "Jenkins-Crumb: ${{ steps.get-crumb.outputs.CRUMB }}" \
+            --user ${{ secrets.USER_TOKEN }}

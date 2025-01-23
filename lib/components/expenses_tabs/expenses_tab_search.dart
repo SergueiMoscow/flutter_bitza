@@ -15,10 +15,10 @@ class _ExpensesTabSearchState extends State<ExpensesTabSearch> {
   DateTime startDate = DateTime.now().subtract(Duration(days: 30));
   DateTime endDate = DateTime.now();
   String searchQuery = '';
-  List<ExpensesChequeModel> searchResults = []; // Изменяем тип на ExpensesChequeModel
+  List<ExpensesChequeModel> searchResults = [];
   bool isLoading = false;
 
-  final ExpensesApi _expensesApi = ExpensesApi(); // Используем новый API
+  final ExpensesApi _expensesApi = ExpensesApi();
 
   Future<void> fetchExpenses() async {
     setState(() {
@@ -98,7 +98,7 @@ class _ExpensesTabSearchState extends State<ExpensesTabSearch> {
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
                 return ExpensesChequeCardComponent(
-                  cheque: searchResults[index], // Передавайте модель
+                  cheque: searchResults[index], // Передаём модель
                 );
               },
             ),
