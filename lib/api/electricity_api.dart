@@ -35,6 +35,4 @@ class ElectricityService {
       return false;
     }
   }
-
-
 }

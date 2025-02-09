@@ -31,7 +31,8 @@ class _CommonAppBarState extends State<CommonAppBar> {
       final fetchedMenu = [
         MenuItem(route: '/main', endpoint: '/dashboard', caption: 'Главная', icon: 'home', picture: 'home.jpg'),
         MenuItem(route: '/profile', endpoint: '/profile', caption: 'Профиль', icon: 'person', picture: 'profile.jpg'),
-        MenuItem(route: '/settings', endpoint: '/settings', caption: 'Настройки', icon: 'settings', picture: 'settings.jpg'),
+        // MenuItem(route: '/settings', endpoint: '/settings', caption: 'Настройки', icon: 'settings', picture: 'settings.jpg'),
+        MenuItem(route: '/contracts', endpoint: '/contracts', caption: 'Договора', icon: 'description', picture: 'contracts.jpg'),
         MenuItem(route: '/payments', endpoint: '/payments', caption: 'Платежи', icon: 'attach_money', picture: 'payments.jpg'),
         MenuItem(route: '/electric_meter', endpoint: '/electric_meter', caption: 'Внесение показаний', icon: 'edit', picture: 'electric_meter.jpg'),
         MenuItem(route: '/electric_consumption', endpoint: '/electric_consumption', caption: 'Расход электроэнергии', icon: 'assessment', picture: 'electric_consumption.jpg'),
@@ -77,6 +78,8 @@ class _CommonAppBarState extends State<CommonAppBar> {
         return Icons.edit;
       case 'assessment':
         return Icons.assessment;
+      case 'description':
+        return Icons.description;
       default:
         return Icons.help;
     }
