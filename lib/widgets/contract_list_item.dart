@@ -116,7 +116,7 @@ class ContractListItem extends StatelessWidget {
               labelText: 'Новая дата',
               border: OutlineInputBorder(),
             ),
-            readOnly: true, // Сделаем поле только для чтения, т.к. есть выбор даты
+            readOnly: false,
             onTap: () async {
               // Открытие диалога выбора даты
               DateTime? pickedDate = await showDatePicker(
