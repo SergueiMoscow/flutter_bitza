@@ -28,8 +28,8 @@ WORKDIR /app/
 # web-renderer deprecated
 
 # Создаем ненулевого пользователя для безопасности
-RUN useradd -m flutteruser
-USER flutteruser
+#RUN useradd -m flutteruser
+#USER flutteruser
 
 #RUN flutter build web --release --no-source-maps
 RUN flutter build web --profile
