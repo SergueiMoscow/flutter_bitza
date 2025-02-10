@@ -12,8 +12,8 @@ RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
 RUN flutter doctor -v
-RUN flutter channel master
-RUN flutter upgrade
+#RUN flutter channel stable
+#RUN flutter upgrade
 
 # Enable web support
 RUN flutter config --enable-web
@@ -26,6 +26,10 @@ WORKDIR /app/
 # Build the Flutter web application
 # RUN flutter build web --release --web-renderer html
 # web-renderer deprecated
+
+# Создаем ненулевого пользователя для безопасности
+RUN useradd -m flutteruser
+USER flutteruser
 
 #RUN flutter build web --release --no-source-maps
 RUN flutter build web --profile
