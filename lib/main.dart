@@ -7,6 +7,7 @@ import 'package:flutter_s3_app/screens/expenses_screen.dart';
 import 'package:flutter_s3_app/screens/main_screen.dart';
 import 'package:flutter_s3_app/screens/profile_screen.dart';
 import 'package:flutter_s3_app/screens/summary_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'screens/login_screen.dart';
@@ -14,6 +15,8 @@ import 'screens/login_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env"); // Загрузка переменных окружения
+  await initializeDateFormatting('ru', null); // Инициализация локали 'ru'
+
   runApp(MyApp());
 }
 

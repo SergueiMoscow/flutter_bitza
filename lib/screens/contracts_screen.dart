@@ -19,6 +19,12 @@ class _ContractsScreenState extends State<ContractsScreen> {
     _contractsFuture = ContractPrintApi().fetchContractPrintResponse();
   }
 
+  void _refreshContracts() {
+    setState(() {
+      _contractsFuture = ContractPrintApi().fetchContractPrintResponse();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class _ContractsScreenState extends State<ContractsScreen> {
               itemCount: contracts.length,
               itemBuilder: (context, index) {
                 final contract = contracts[index];
-                return ContractListItem(contract: contract);
+                return ContractListItem(contract: contract, onUpdate: _refreshContracts);
               },
             );
           }

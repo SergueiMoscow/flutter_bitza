@@ -53,7 +53,7 @@ class ContractPrintApi {
 
   }
 
-  Future<void> addContractPrint(String? recommendedDate, String contractNumber) async {
+  Future<bool> addContractPrint(String? recommendedDate, String contractNumber) async {
     final response = await AuthApiService().authenticatedRequest(
       endpoint: '/api/rent/print-contracts/add/',
       method: 'POST',
@@ -63,7 +63,9 @@ class ContractPrintApi {
     if (response.statusCode == 201) {
       // TODO: доделать
       print('Перезагрузить этот экран');
+      return true;
     }
+    return false;
   }
 
 }
