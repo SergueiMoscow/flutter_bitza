@@ -3,17 +3,22 @@ FROM debian:latest AS build-env
 
 RUN apt-get update
 # Install necessary dependencies for running Flutter on web
-RUN apt-get install -y libxi6 libgtk-3-0 libxrender1 libxtst6 libxslt1.1 curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3
+RUN apt-get install -y libxi6 libgtk-3-0 libxrender1 libxtst6 libxslt1.1 curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3 && apt-get clean
 RUN apt-get clean
+
+# Создание пользователя
+RUN useradd -m flutteruser
+USER flutteruser
+WORKDIR /home/flutteruser
 
 RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
 
 # Set Flutter path
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
-RUN flutter doctor -v
-#RUN flutter channel stable
-#RUN flutter upgrade
+# RUN flutter doctor -v
+# RUN flutter channel stable
+# RUN flutter upgrade
 
 # Enable web support
 RUN flutter config --enable-web
