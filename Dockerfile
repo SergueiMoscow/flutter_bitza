@@ -11,10 +11,10 @@ RUN useradd -m flutteruser
 USER flutteruser
 WORKDIR /home/flutteruser
 
-RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+RUN git clone https://github.com/flutter/flutter.git /home/flutteruser/flutter
 
 # Set Flutter path
-ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
+ENV PATH="/home/flutteruser/flutter/bin:/home/flutteruser/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
 # RUN flutter doctor -v
 # RUN flutter channel stable
